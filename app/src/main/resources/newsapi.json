@@ -1,0 +1,58 @@
+{
+  "status": "ok",
+  "totalResults": 34,
+  "articles": [
+    {
+      "source": {
+        "id": null,
+        "name": "Youm7.com"
+      },
+      "author": null,
+      "title": "أحمد رزق عن فيلم \"ريش\": وضعنى فى مود سيئ وماحبتوش ومصر كبيرة - اليوم السابع",
+      "description": "قال النجم أحمد رزق، لـ\"اليوم السابع\"، إنه من حق أى فنان أو صانع محتوى أن يقدم ما يراه من وجهة نظره.",
+      "url": "https://www.youm7.com/story/2021/10/19/أحمد-رزق-عن-فيلم-ريش-وضعنى-فى-مود-سيئ-وماحبتوش/5501283",
+      "urlToImage": "https://img.youm7.com/large/202002250713501350.jpg",
+      "publishedAt": "2021-10-19T13:48:00Z",
+      "content": null
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Youm7.com"
+      },
+      "author": null,
+      "title": "عاش غريبًا ومات وحيدًا .. وفاة ودفن ابن محمد عبدالمطلب فى المغرب - اليوم السابع",
+      "description": "رحل منذ قليل نور محمد عبدالمطلب ابن ملك المواويل المطرب الكبير محمد عبدالمطلب فى المغرب بعد معاناة شديدة مع المرض وقبل استكمال إجراءات عودته وعلاجه فى مصر",
+      "url": "https://www.youm7.com/story/2021/10/19/عاش-غريبًا-ومات-وحيدًا-وفاة-ودفن-ابن-محمد-عبدالمطلب-فى/5501237",
+      "urlToImage": "https://img.youm7.com/large/202110190145584558.jpg",
+      "publishedAt": "2021-10-19T12:30:00Z",
+      "content": null
+    },
+    {
+      "source": {
+        "id": null,
+        "name": "Filgoal.com"
+      },
+      "author": "<a href='https://www.filgoal.com/editor/details/81'>أحمد الخولي</a>",
+      "title": "خبر في الجول – 3 مرشحين جدد قد يتواجدون في قائمة الخطيب بانتخابات الأهلي - FilGoal.com",
+      "description": "يبدأ محمود الخطيب رئيس مجلس إدارة الأهلي عقد عدة اجتماعات اليوم الثلاثاء مع أعضاء الإدارة لمناقشتهم حول القائمة التي سيخوض بها سباق انتخابات ناديه.",
+      "url": "https://www.filgoal.com/articles/420717",
+      "urlToImage": "https://media.filgoal.com/news/verylarge/280040_0.jpg",
+      "publishedAt": "2021-10-19T11:39:00Z",
+      "content": null
+    },
+    {
+      "source": {
+        "id": "google-news",
+        "name": "Google News"
+      },
+      "author": null,
+      "title": "كنز العملات القديمة .. ابحث عن «الجنيه أبو جملين» و«الشلن» و«البريزة» (التفاصيل وأماكن البيع) - Al Masry Al Youm - المصري اليوم",
+      "description": null,
+      "url": "https://news.google.com/__i/rss/rd/articles/CBMiMmh0dHBzOi8vd3d3LmFsbWFzcnlhbHlvdW0uY29tL25ld3MvZGV0YWlscy8yNDQyNDQw0gE1aHR0cHM6Ly93d3cuYWxtYXNyeWFseW91bS5jb20vbmV3cy9kZXRhaWxzYW1wLzI0NDI0NDA?oc=5",
+      "urlToImage": null,
+      "publishedAt": "2021-10-19T11:15:00Z",
+      "content": null
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".representation.news.fragment.NewsFragment">
+
+
+        <com.yarolegovich.discretescrollview.DiscreteScrollView
+            android:id="@+id/category_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_100sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            app:dsv_orientation="horizontal" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+
+            android:background="@color/white"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardElevation="@dimen/_15sdp"
+            app:cardMaxElevation="@dimen/_15sdp"
+            app:layout_constraintTop_toBottomOf="@+id/category_recycler"
+             android:id="@+id/search_view_card"
+            >
+        <SearchView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/search_view"
+            />
+        </androidx.cardview.widget.CardView>
+   <androidx.recyclerview.widget.RecyclerView
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       tools:listitem="@layout/news_item"
+       android:id="@+id/recycler"
+       app:layout_constraintTop_toBottomOf="@+id/search_view_card"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintBottom_toBottomOf="parent"
+       />
+       <ProgressBar
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:id="@+id/loading_bar"
+           app:layout_constraintTop_toTopOf="parent"
+           app:layout_constraintEnd_toEndOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+           app:layout_constraintBottom_toBottomOf="parent"
+           />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
