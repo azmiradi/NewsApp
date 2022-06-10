@@ -1,7 +1,7 @@
 package azmithabet.com.news.representation.di
 
-import azmithabet.com.news.BuildConfig
 import azmithabet.com.news.data.api.ApiServices
+import com.azmithabet.restaurantsguide.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

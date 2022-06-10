@@ -1,10 +1,9 @@
 package azmithabet.com.news.data.repository
 
 import azmithabet.com.news.data.model.artical.ApiResponse
-import azmithabet.com.news.data.model.artical.ArticlesItem
+import azmithabet.com.news.data.model.artical.ArticleItem
 import azmithabet.com.news.data.repository.datasource.NewsDatabaseDataSource
 import azmithabet.com.news.data.repository.datasource.NewsRemoteDataSource
-import azmithabet.com.news.data.util.Resource
 import azmithabet.com.news.domain.repository.NewsRepository
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
@@ -17,46 +16,21 @@ class NewsRepositoryImpl(
     override suspend fun getNews(
         country: String,
         page: Int,
-        category: String
-    ): Resource<ApiResponse> {
-        return responseToResource(newsRemoteDataSource.getNews(country, page, category))
+        category: String,
+        query: String?
+    ): Response<ApiResponse> {
+        return  newsRemoteDataSource.getNews(country, page, category,query)
     }
-
-    private fun responseToResource(response: Response<ApiResponse>): Resource<ApiResponse> {
-        if (response.isSuccessful) {
-            response.body()?.let {
-                return Resource.Success(it)
-            }
-        }
-        return Resource.Error(response.message())
-    }
-
-    override suspend fun getSearchNews(
-        querySearch: String,
-        country: String,
-        page: Int,
-        category: String
-    ): Resource<ApiResponse> {
-        return responseToResource(
-            newsRemoteDataSource.getSearchNews(
-                querySearch,
-                country,
-                page,
-                category
-            )
-        )
-    }
-
-    override fun getSavedNews(): Flow<List<ArticlesItem>> {
+    override fun getSavedNews(): Flow<List<ArticleItem>> {
        return newsDatabaseDataSource.getAllArticles()
     }
 
-    override suspend fun deleteSavedNews(articlesItem: ArticlesItem):Int {
-         return newsDatabaseDataSource.deleteArticle(articlesItem)
+    override suspend fun deleteSavedNews(articleItem: ArticleItem):Int {
+         return newsDatabaseDataSource.deleteArticle(articleItem)
     }
 
-    override suspend fun saveNews(articlesItem: ArticlesItem):Long {
-         return newsDatabaseDataSource.insertArticle(articlesItem)
+    override suspend fun saveNews(articleItem: ArticleItem):Long {
+         return newsDatabaseDataSource.insertArticle(articleItem)
     }
 
 
