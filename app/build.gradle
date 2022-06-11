@@ -85,7 +85,6 @@ dependencies {
     //pager
     implementation "com.google.accompanist:accompanist-pager-indicators:0.20.3"
     implementation "com.google.accompanist:accompanist-pager:0.23.1"
-    implementation "com.google.accompanist:accompanist-flowlayout:0.24.10-beta"
 
     //Test
     testImplementation 'junit:junit:4.13.2'

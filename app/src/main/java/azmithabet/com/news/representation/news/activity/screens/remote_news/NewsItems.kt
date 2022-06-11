@@ -8,7 +8,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
@@ -24,7 +28,8 @@ import azmithabet.com.news.data.model.artical.ArticleItem
 import azmithabet.com.news.data.util.formatDate
 import azmithabet.com.news.data.util.imageBuilder
 import azmithabet.com.news.representation.theme.Typography
-import bumblebee.io.mid.ui.theme.TeaGreen
+import azmithabet.com.news.representation.theme.RED_CUSTOM
+import azmithabet.com.news.representation.theme.TeaGreen
 import coil.compose.rememberImagePainter
 import com.azmithabet.circleimageviewcompose.CircleImage
 import com.ireward.htmlcompose.HtmlText
@@ -33,7 +38,9 @@ import com.ireward.htmlcompose.HtmlText
 fun NewsItemShape1(
     modifier: Modifier,
     articleItem: ArticleItem,
-    onNewsClick: (ArticleItem) -> Unit
+    isLocal:Boolean=false,
+    onNewsClick: (ArticleItem) -> Unit,
+    onDeleteLocal:((ArticleItem)->Unit)?=null
 ) {
     val time = rememberSaveable {
         articleItem.publishedAt?.formatDate() ?: ""
@@ -98,6 +105,21 @@ fun NewsItemShape1(
 
             }
 
+            if (isLocal) {
+                IconButton(onClick = {
+                    onDeleteLocal?.invoke(articleItem)
+                } ,
+                    modifier = Modifier
+                        .align(Alignment.TopEnd)
+                        .padding(15.dp)) {
+                    Icon(
+                        imageVector = Icons.Default.Delete,
+                        contentDescription = "",
+                        tint = RED_CUSTOM,
+                    )
+                }
+
+            }
         }
 
     }

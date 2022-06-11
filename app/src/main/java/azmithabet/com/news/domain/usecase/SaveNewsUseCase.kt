@@ -7,6 +7,6 @@ import javax.inject.Inject
 class SaveNewsUseCase @Inject constructor(private val repository: NewsRepository) {
 
     suspend operator fun invoke(articleItem: ArticleItem):Long{
-        return repository.saveNews(articleItem)
+        return repository.saveArticle(articleItem)
     }
 }

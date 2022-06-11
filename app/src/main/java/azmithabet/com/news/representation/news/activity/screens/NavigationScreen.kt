@@ -1,6 +1,6 @@
 package azmithabet.com.news.representation.news.activity.screens
 
-import androidx.activity.compose.BackHandler
+import android.os.Bundle
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
@@ -10,55 +10,30 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import androidx.navigation.Navigator
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import azmithabet.com.news.data.model.artical.ArticleItem
+import azmithabet.com.news.data.util.navigateWithArgs
+import azmithabet.com.news.data.util.requiredArg
 import azmithabet.com.news.representation.news.activity.screens.local_news.LocalScreen
 import azmithabet.com.news.representation.news.activity.screens.news_details.NewsDetails
 import azmithabet.com.news.representation.news.activity.screens.remote_news.RemoteNewsScreen
-import bumblebee.io.mid.ui.theme.BlueDark
-import kotlinx.coroutines.launch
+import azmithabet.com.news.representation.theme.BlueDark
+import azmithabet.com.news.representation.theme.GrayOpen
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun NavigationScreen() {
     val navController = rememberNavController()
-    val scaffoldState = rememberBottomSheetScaffoldState()
-    val coroutineScope= rememberCoroutineScope()
-    var articleItem by remember {
-        mutableStateOf<ArticleItem?>(null)
-    }
 
     Scaffold(
         bottomBar = { BottomNavigationBar(navController) }
     ) { innerPadding ->
-        BottomSheetScaffold(
-            sheetGesturesEnabled=false,
-            sheetContent ={
-                articleItem?.let {
-                    NewsDetails(it)
-                }
-            }, scaffoldState = scaffoldState,
-        ) {
-            NavigationControl(navController, innerPadding){
-                articleItem=it
-                coroutineScope.launch {
-                    scaffoldState.bottomSheetState.expand()
-                }
-            }
-        }
-    }
 
-    BackHandler {
-        if (scaffoldState.bottomSheetState.isExpanded)
-        {
-            coroutineScope.launch {
-                scaffoldState.bottomSheetState.collapse()
-            }
-        } else{
-            navController.popBackStack()
+        NavigationControl(navController, innerPadding) { articleItem->
+            navController.navigateWithArgs(NavigationDestination.NEWS_DETAILS,"article_item" to articleItem)
         }
     }
 
@@ -72,8 +47,8 @@ fun BottomNavigationBar(navController: NavController) {
         NavigationItem.LocalNews,
     )
     BottomNavigation(
-        backgroundColor = Color.White,
-        contentColor = Color.White
+        backgroundColor = GrayOpen,
+        contentColor = GrayOpen
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
@@ -117,8 +92,8 @@ fun BottomNavigationBar(navController: NavController) {
 fun NavigationControl(
     navController: NavHostController,
     innerPadding: PaddingValues,
-    onNewsClick:(ArticleItem)->Unit
-){
+    onNewsClick: (ArticleItem) -> Unit
+) {
     NavHost(
         navController, startDestination = NavigationItem.RemoteNews.route,
         modifier = Modifier.padding(innerPadding)
@@ -133,6 +108,12 @@ fun NavigationControl(
             LocalScreen(onNewsClick)
         }
 
+        composable(NavigationDestination.NEWS_DETAILS){
+            NewsDetails(articleItem = it.requiredArg("article_item"))
+            {
+                navController.popBackStack()
+            }
+        }
 
     }
 }

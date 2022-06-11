@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import azmithabet.com.news.representation.theme.NotoFamily
-import bumblebee.io.mid.ui.theme.GreenColor
+import azmithabet.com.news.representation.theme.GreenColor
 import com.azmithabet.restaurantsguide.R
 @Composable
 fun ProgressBar(

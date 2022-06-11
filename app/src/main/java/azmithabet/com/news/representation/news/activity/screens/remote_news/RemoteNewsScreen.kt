@@ -11,6 +11,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import azmithabet.com.news.data.model.artical.ArticleItem
@@ -20,7 +21,7 @@ import azmithabet.com.news.data.util.showToast
 import azmithabet.com.news.representation.news.activity.screens.AlertDialog
 import azmithabet.com.news.representation.news.activity.screens.ProgressBar
 import azmithabet.com.news.representation.theme.Typography
-import bumblebee.io.mid.ui.theme.TeaGreen
+import azmithabet.com.news.representation.theme.TeaGreen
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.rememberPagerState
 
@@ -129,6 +130,30 @@ fun RemoteNewsScreen(
 
             }
 
+            item {
+                healthNews?.let {
+                    HeaderTitle(string = NewsCategories.Health.category.uppercase())
+
+                    LazyRow(
+                        horizontalArrangement
+                        = Arrangement.spacedBy(10.dp),
+                    ) {
+                        items(
+                            items = it
+                        ) { articleItem ->
+
+                            NewsItemShape1(
+                                modifier = Modifier
+                                    .width(140.dp)
+                                    .height(230.dp), articleItem = articleItem,
+                                onNewsClick=onNewsClick
+                            )
+                        }
+                    }
+                }
+            }
+
+
         }
 
         val isLoading= remember() {
@@ -170,8 +195,9 @@ fun HeaderTitle(string: String) {
         ) {
             Text(
                 text = string, style = Typography.h1,
-                modifier = Modifier.padding(start = 20.dp, top = 5.dp, end = 5.dp),
-                maxLines = 1
+                textAlign = TextAlign.Center,
+                modifier =
+                Modifier.padding(start = 20.dp, top = 5.dp, end = 5.dp),
             )
         }
         Spacer(modifier = Modifier.height(15.dp))

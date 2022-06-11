@@ -5,7 +5,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-import azmithabet.com.news.representation.theme.Typography
+import azmithabet.com.news.representation.theme.*
 
 private val DarkColorPalette = darkColors(
     primary = Purple200,

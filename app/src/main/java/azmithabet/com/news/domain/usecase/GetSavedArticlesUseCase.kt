@@ -5,10 +5,10 @@ import azmithabet.com.news.domain.repository.NewsRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetSavedNewsUseCase @Inject constructor(private val repository: NewsRepository) {
+class GetSavedArticlesUseCase @Inject constructor(private val repository: NewsRepository) {
 
       operator fun invoke():Flow<List<ArticleItem>>{
-          return repository.getSavedNews()
+          return repository.getSavedArticles()
       }
 
 }

@@ -21,15 +21,15 @@ class NewsRepositoryImpl(
     ): Response<ApiResponse> {
         return  newsRemoteDataSource.getNews(country, page, category,query)
     }
-    override fun getSavedNews(): Flow<List<ArticleItem>> {
+    override fun getSavedArticles(): Flow<List<ArticleItem>> {
        return newsDatabaseDataSource.getAllArticles()
     }
 
-    override suspend fun deleteSavedNews(articleItem: ArticleItem):Int {
+    override suspend fun deleteSavedArticle(articleItem: ArticleItem):Int {
          return newsDatabaseDataSource.deleteArticle(articleItem)
     }
 
-    override suspend fun saveNews(articleItem: ArticleItem):Long {
+    override suspend fun saveArticle(articleItem: ArticleItem):Long {
          return newsDatabaseDataSource.insertArticle(articleItem)
     }
 

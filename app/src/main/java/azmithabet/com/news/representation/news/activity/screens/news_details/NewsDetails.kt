@@ -22,20 +22,25 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import azmithabet.com.news.data.model.artical.ArticleItem
 import azmithabet.com.news.data.util.showToast
 import azmithabet.com.news.representation.news.activity.screens.remote_news.HeaderTitle
-import bumblebee.io.mid.ui.theme.BlueDark
+import azmithabet.com.news.representation.theme.BlueDark
 import com.azmithabet.restaurantsguide.R
 import kotlinx.coroutines.launch
 
 @Composable
 fun NewsDetails(
     articleItem: ArticleItem,
-    viewModel: NewsDetailsViewModel = hiltViewModel()
+    viewModel: NewsDetailsViewModel = hiltViewModel(),
+    onBack: () -> Unit
 ) {
     val context = LocalContext.current
     var rememberWebViewProgress: Int by remember { mutableStateOf(-1) }
 
 
-    Column(Modifier.fillMaxWidth()) {
+    Column(
+        Modifier
+            .fillMaxWidth()
+
+    ) {
         HeaderTitle(string = articleItem.title.toString())
         Box(Modifier.fillMaxSize()) {
 
@@ -61,7 +66,10 @@ fun NewsDetails(
                 }, onBack = { webView ->
                     if (webView?.canGoBack() == true) {
                         webView.goBack()
+                    } else {
+                        onBack()
                     }
+
                 }, onReceivedError = {
 
                 }
@@ -105,58 +113,64 @@ fun CustomWebView(
     initSettings: (webSettings: WebSettings?) -> Unit = {},
     onReceivedError: (error: WebResourceError?) -> Unit = {}
 ) {
-    val webViewChromeClient = object : WebChromeClient() {
-        override fun onProgressChanged(view: WebView?, newProgress: Int) {
-            onProgressChange(newProgress)
-            super.onProgressChanged(view, newProgress)
+    val webViewChromeClient = remember {
+        object : WebChromeClient() {
+            override fun onProgressChanged(view: WebView?, newProgress: Int) {
+                onProgressChange(newProgress)
+                super.onProgressChanged(view, newProgress)
+            }
         }
     }
-    val webViewClient = object : WebViewClient() {
-        override fun onPageStarted(
-            view: WebView?, url: String?,
-            favicon: Bitmap?
-        ) {
-            super.onPageStarted(view, url, favicon)
-            onProgressChange(-1)
-        }
+    val webViewClient = remember {
+        object : WebViewClient() {
+            override fun onPageStarted(
+                view: WebView?, url: String?,
+                favicon: Bitmap?
+            ) {
+                super.onPageStarted(view, url, favicon)
+                onProgressChange(-1)
+            }
 
-        override fun onPageFinished(view: WebView?, url: String?) {
-            super.onPageFinished(view, url)
-            onProgressChange(100)
-        }
+            override fun onPageFinished(view: WebView?, url: String?) {
+                super.onPageFinished(view, url)
+                onProgressChange(100)
+            }
 
-        override fun shouldOverrideUrlLoading(
-            view: WebView?,
-            request: WebResourceRequest?
-        ): Boolean {
-            if (null == request?.url) return false
-            val showOverrideUrl = request.url.toString()
-            try {
-                if (!showOverrideUrl.startsWith("http://")
-                    && !showOverrideUrl.startsWith("https://")
-                ) {
-                    Intent(Intent.ACTION_VIEW, Uri.parse(showOverrideUrl)).apply {
-                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                        view?.context?.applicationContext?.startActivity(this)
+            override fun shouldOverrideUrlLoading(
+                view: WebView?,
+                request: WebResourceRequest?
+            ): Boolean {
+                if (null == request?.url) return false
+                val showOverrideUrl = request.url.toString()
+                try {
+                    if (!showOverrideUrl.startsWith("http://")
+                        && !showOverrideUrl.startsWith("https://")
+                    ) {
+                        Intent(Intent.ACTION_VIEW, Uri.parse(showOverrideUrl)).apply {
+                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            view?.context?.applicationContext?.startActivity(this)
+                        }
+                        return true
                     }
+                } catch (e: Exception) {
                     return true
                 }
-            } catch (e: Exception) {
-                return true
+                return super.shouldOverrideUrlLoading(view, request)
             }
-            return super.shouldOverrideUrlLoading(view, request)
-        }
 
-        override fun onReceivedError(
-            view: WebView?,
-            request: WebResourceRequest?,
-            error: WebResourceError?
-        ) {
-            super.onReceivedError(view, request, error)
-            onReceivedError(error)
+            override fun onReceivedError(
+                view: WebView?,
+                request: WebResourceRequest?,
+                error: WebResourceError?
+            ) {
+                super.onReceivedError(view, request, error)
+                onReceivedError(error)
+            }
         }
     }
-    var webView: WebView? = null
+    var webView: WebView? = remember {
+        null
+    }
     val coroutineScope = rememberCoroutineScope()
     AndroidView(modifier = modifier, factory = { ctx ->
         WebView(ctx).apply {

@@ -9,10 +9,10 @@ interface NewsRepository {
     suspend fun getNews(country: String, page: Int,category: String,query:String?=null): Response<ApiResponse>
 
 
-    fun getSavedNews(): Flow<List<ArticleItem>>
+    fun getSavedArticles(): Flow<List<ArticleItem>>
 
-    suspend fun deleteSavedNews(articleItem: ArticleItem):Int
+    suspend fun deleteSavedArticle(articleItem: ArticleItem):Int
 
-    suspend fun saveNews(articleItem: ArticleItem):Long
+    suspend fun saveArticle(articleItem: ArticleItem):Long
 
 }

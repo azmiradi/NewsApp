@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
-import bumblebee.io.mid.ui.theme.YellowDark
+import azmithabet.com.news.representation.theme.YellowDark
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.yield
 
