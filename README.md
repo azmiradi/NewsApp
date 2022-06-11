@@ -27,7 +27,7 @@
   ###### **Tools and IDEs uses.**
 * Android Studio
 
-*   **[Download latest debug APK here] (https://github.com/azmiradi/TestApp/blob/master/app-debug.apk)**.
+*   **[Download latest debug APK here] (https://github.com/azmiradi/NewsApp/blob/compose/app-debug.apk)**.
 
 
 | splach | main |
