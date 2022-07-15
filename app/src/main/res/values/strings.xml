@@ -7,4 +7,6 @@
     <string name="article_saved">Article Saved</string>
     <string name="article_deleted">Deleted Successfully</string>
     <string name="undo">Undo</string>
+    <string name="loading">Loading....</string>
+    <string name="tryAgain">Try Again</string>
 </resources>

@@ -1,19 +1,18 @@
 package azmithabet.com.news.domain.repository
 
 import azmithabet.com.news.data.model.artical.ApiResponse
-import azmithabet.com.news.data.model.artical.ArticlesItem
-import azmithabet.com.news.data.util.Resource
+import azmithabet.com.news.data.model.artical.ArticleItem
 import kotlinx.coroutines.flow.Flow
+import retrofit2.Response
 
 interface NewsRepository {
-    suspend fun getNews(country: String, page: Int,category: String): Resource<ApiResponse>
+    suspend fun getNews(country: String, page: Int,category: String,query:String?=null): Response<ApiResponse>
 
-    suspend fun getSearchNews(querySearch: String,country: String, page: Int,category: String): Resource<ApiResponse>
 
-    fun getSavedNews(): Flow<List<ArticlesItem>>
+    fun getSavedArticles(): Flow<List<ArticleItem>>
 
-    suspend fun deleteSavedNews(articlesItem: ArticlesItem):Int
+    suspend fun deleteSavedArticle(articleItem: ArticleItem):Int
 
-    suspend fun saveNews(articlesItem: ArticlesItem):Long
+    suspend fun saveArticle(articleItem: ArticleItem):Long
 
 }

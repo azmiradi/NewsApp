@@ -1,5 +1,4 @@
-package azmithabet.com.testapp.data.api
-import azmithabet.com.news.data.api.ApiServices
+package azmithabet.com.news.data.api
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
@@ -46,7 +45,7 @@ class ApiServicesTest {
     fun getArticlesFromAPITest(){
         runBlocking {
             enqueueMockResponse("newsapi.json")
-            val responseBody = service.getNews(country, page, category).body()
+            val responseBody = service.getNews(country, page=page, category = category).body()
             val request = server.takeRequest()
             assertThat(responseBody).isNotNull()
             assertThat(request.path).isEqualTo("/v2/top-headlines?country=eg&page=1&category=general&apiKey=c045de1344e24899bffd2bb6d9c08bd5")
@@ -57,7 +56,7 @@ class ApiServicesTest {
     fun getArticlesSizeTest(){
         runBlocking {
             enqueueMockResponse("newsapi.json")
-            val responseBody = service.getNews(country, page, category).body()
+            val responseBody = service.getNews(country, page = page,category= category).body()
             val articlesList = responseBody!!.articles
             assertThat(articlesList!!.size).isEqualTo(4)
         }
@@ -67,7 +66,7 @@ class ApiServicesTest {
     fun getArticlesCorrectContent(){
         runBlocking {
             enqueueMockResponse("newsapi.json")
-            val responseBody = service.getNews(country, page, category).body()
+            val responseBody = service.getNews(country, page=page, category=category).body()
             val articlesList = responseBody!!.articles
             val articlesItem = articlesList!![0]
             assertThat(articlesItem!!.url).isEqualTo("https://www.youm7.com/story/2021/10/19/أحمد-رزق-عن-فيلم-ريش-وضعنى-فى-مود-سيئ-وماحبتوش/5501283")
