@@ -40,3 +40,6 @@
 | <img src="news_details_web_view.png" height="480"> | <img src="saved_news_screen.png" height="480"> |
 
 <!-- Redmi not 6 pro -->
+
+Hi this is fork app 
+-- fork 2
